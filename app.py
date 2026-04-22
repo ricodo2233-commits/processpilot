@@ -582,7 +582,7 @@ st.markdown(
         border-radius: 10px;
         font-weight: 600;
         width: fit-content;
-        margin-bottom: 10px;
+        margin-bottom: 25px;
     ">
         Process Status: {status_text}
     </div>
