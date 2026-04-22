@@ -550,6 +550,46 @@ all_values = data_matrix.flatten()
 # -------------------------------------------------
 st.markdown(f"<div class='mini-label'>Data source: {data_source}</div>", unsafe_allow_html=True)
 
+# ---------- PROCESS STATUS INDICATOR ----------
+
+def get_process_status(xbar_out, r_out, subgroup_means, xbar_limits):
+    has_out_of_control = len(xbar_out) > 0 or len(r_out) > 0
+    has_run = has_long_run(subgroup_means, xbar_limits.center)
+
+    if has_out_of_control:
+        return "🔴 Out of Control", "#ff4b4b"
+    elif has_run:
+        return "🟡 Warning", "#f7b500"
+    else:
+        return "🟢 In Control", "#28c76f"
+
+
+# compute status
+status_text, status_color = get_process_status(
+    xbar_out,
+    r_out,
+    subgroup_means,
+    xbar_limits
+)
+
+# display status box
+st.markdown(
+    f"""
+    <div style="
+        background: {status_color};
+        color: white;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        width: fit-content;
+        margin-bottom: 10px;
+    ">
+        Process Status: {status_text}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 m1, m2, m3, m4, m5 = st.columns(5)
 with m1:
     st.markdown(metric_card("Grand Mean", format_metric(subgroup_means.mean()), "Overall subgroup average"), unsafe_allow_html=True)
