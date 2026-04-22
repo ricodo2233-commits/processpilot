@@ -606,6 +606,7 @@ with m5:
 # -------------------------------------------------
 # Visual analysis
 # -------------------------------------------------
+st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
 st.markdown("<div class='section-box'>", unsafe_allow_html=True)
 st.markdown("<div class='small-heading'>Visual analysis</div>", unsafe_allow_html=True)
 
