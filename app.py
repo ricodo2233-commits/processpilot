@@ -553,12 +553,12 @@ st.markdown(f"<div class='mini-label'>Data source: {data_source}</div>", unsafe_
 # ---------- PROCESS STATUS INDICATOR ----------
 
 def get_process_status(xbar_out, r_out, subgroup_means, xbar_limits):
-    has_out_of_control = len(xbar_out) > 0 or len(r_out) > 0
+    total_out = len(xbar_out) + len(r_out)
     has_run = has_long_run(subgroup_means, xbar_limits.center)
 
-    if has_out_of_control:
+    if total_out >= 2:
         return "🔴 Out of Control", "#ff4b4b"
-    elif has_run:
+    elif total_out == 1 or has_run:
         return "🟡 Warning", "#f7b500"
     else:
         return "🟢 In Control", "#28c76f"
